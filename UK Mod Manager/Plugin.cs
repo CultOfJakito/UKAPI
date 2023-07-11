@@ -3,9 +3,9 @@ using BepInEx.Logging;
 using HarmonyLib;
 using System;
 
-namespace UMM.Loader
+namespace UKAPI.Internal
 {
-    [BepInPlugin("UMM", "umm.mainManager", VersionHandler.VERSION)]
+    [BepInPlugin("UKAPI", "ukapi.mainPlugin", VersionHandler.VERSION)]
     public class Plugin : BaseUnityPlugin
     {
         private static bool initialized = false;
@@ -18,10 +18,10 @@ namespace UMM.Loader
             {
                 instance = this;
                 logger = Logger;
-                logger.LogMessage("UMM initializing!");
+                logger.LogMessage("UKAPI initializing!");
                 try
                 {
-                    new Harmony("umm.mainManager").PatchAll();
+                    new Harmony("ukapi.mainPlugin").PatchAll();
 
                     UKAPI.Initialize();
                     StartCoroutine(VersionHandler.CheckVersion());
@@ -43,7 +43,7 @@ namespace UMM.Loader
 
         private void OnApplicationQuit()
         {
-            UKAPI.SaveFileHandler.DumpFile();
+            SaveFileHandler.DumpFile();
         }
     }
 }

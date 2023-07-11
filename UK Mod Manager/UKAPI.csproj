@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -7,8 +7,8 @@
     <ProjectGuid>{DDEBE751-4B58-4EFE-9E8B-A9F8BAA98F33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UMM</RootNamespace>
-    <AssemblyName>UMM</AssemblyName>
+    <RootNamespace>UKAPI</RootNamespace>
+    <AssemblyName>UKAPI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -116,19 +116,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\UKKeyBind.cs" />
-    <Compile Include="API\UKDependency.cs" />
-    <Compile Include="Harmony Patches\Cybergrind Patches.cs" />
-    <Compile Include="Harmony Patches\Mod UI Patches.cs" />
-    <Compile Include="ModInformation.cs" />
-    <Compile Include="ModProfile.cs" />
+    <Compile Include="UKAPI\KeyBindHandler.cs" />
+    <Compile Include="UKAPI\UKKeyBind.cs" />
+    <Compile Include="UKAPI\VersionHandler.cs" />
+    <Compile Include="UMM\UKDependency.cs" />
+    <Compile Include="UKAPI\Harmony Patches\Cybergrind Patches.cs" />
+    <Compile Include="UKAPI\Harmony Patches\Mod UI Patches.cs" />
+    <Compile Include="UMM\ModInformation.cs" />
+    <Compile Include="UMM\ModProfile.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="API\UKAPI.cs" />
-    <Compile Include="UltraModManager.cs" />
+    <Compile Include="UKAPI\UKAPI.cs" />
+    <Compile Include="UKAPI\SaveFileHandler.cs" />
+    <Compile Include="UMM\UKMod.cs" />
+    <Compile Include="UMM\UKPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="API\UKMod.cs" />
-    <Compile Include="API\UKPlugin.cs" />
-    <Compile Include="VersionHandler.cs" />
+    <Compile Include="UMM\UltraModManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

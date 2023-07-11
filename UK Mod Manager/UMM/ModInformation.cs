@@ -1,13 +1,12 @@
 ﻿using System;
-using UMM.Loader;
 using BepInEx;
 using UnityEngine;
-using UnityEngine.UI;
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
+using UKAPI.Internal;
 
-namespace UMM
+namespace UKAPI.UMM
 {
     public class ModInformation : IComparable<ModInformation>
     {

@@ -3,11 +3,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace UMM.Loader
+namespace UKAPI.Internal
 {
     public static class VersionHandler
     {
         public const string VERSION = "0.5.7"; // Should this be hardcoded? No it should not be
+        public static string NewLoaderVersion = null;
+        
         public static  IEnumerator CheckVersion()
         {
             //Plugin.logger.LogInfo("Trying to get verison.");
@@ -34,14 +36,14 @@ namespace UMM.Loader
                     if (VERSION.CompareTo(latestVersion) < 0)
                     {
                         Plugin.logger.LogWarning("New UMM version found: " + latestVersion + " while the current version is: " + VERSION + ", consider upgrading to the new version.");
-                        UltraModManager.outdated = true;
+                        UKAPI.IsOutdated = true;
                     }
                     else
                     {
                         Plugin.logger.LogWarning("Latest available UMM build is: " + latestVersion + " while the current version is: " + VERSION + ", be warned that in a dev build mods, or UMM itself, can break.");
-                        UltraModManager.devBuild = true;
+                        UKAPI.IsDevBuild = true;
                     }
-                    UltraModManager.newLoaderVersion = latestVersion;
+                    NewLoaderVersion = latestVersion;
                 }
                 else
                     Plugin.logger.LogMessage("UMM is up to date!");

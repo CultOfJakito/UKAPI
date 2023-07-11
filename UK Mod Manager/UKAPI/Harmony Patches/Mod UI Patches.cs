@@ -2,13 +2,14 @@
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
-using UMM.Loader;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using UKAPI.Internal;
+using UKAPI.UMM;
 
-namespace UMM.HarmonyPatches
+namespace UKAPI.HarmonyPatches
 {
     [HarmonyPatch(typeof(OptionsMenuToManager), "Start")]
     internal static class Inject_ModsButton
@@ -205,7 +206,7 @@ namespace UMM.HarmonyPatches
                         loadOnStartToggle.onValueChanged.AddListener(delegate
                         {
                             info.loadOnStart = loadOnStartToggle.isOn;
-                            UKAPI.SaveFileHandler.SetModData(info.modName, "LoadOnStart", info.loadOnStart.ToString());
+                            SaveFileHandler.SetModData(info.modName, "LoadOnStart", info.loadOnStart.ToString());
                         });
                         EventTrigger loadOnStartTrigger = loadOnStartToggle.gameObject.AddComponent<EventTrigger>();
                         EventTrigger.Entry loadOnStartHoverEntry = new EventTrigger.Entry();
@@ -317,12 +318,12 @@ namespace UMM.HarmonyPatches
             modOptions.transform.Find("Mouse Wheel Settings").gameObject.SetActive(false);
             modOptions.transform.Find("Text (1)").GetComponent<Text>().text = "-- MODDED --";
 
-            List<string> binds = UKAPI.KeyBindHandler.moddedKeyBinds.Keys.ToList().Where(x => UKAPI.KeyBindHandler.moddedKeyBinds[x].enabled).ToList(); // CoPilot wrote that Where statement, I am so fucking bamboozled
+            List<string> binds = KeyBindHandler.moddedKeyBinds.Keys.ToList().Where(x => KeyBindHandler.moddedKeyBinds[x].enabled).ToList(); // CoPilot wrote that Where statement, I am so fucking bamboozled
             int bindIndex;
             for (bindIndex = 0; bindIndex < binds.Count; bindIndex++)
             {
                 string keybindName = binds[bindIndex];
-                UKKeyBind keybind = UKAPI.KeyBindHandler.moddedKeyBinds[keybindName];
+                UKKeyBind keybind = KeyBindHandler.moddedKeyBinds[keybindName];
                 GameObject newKeyBind = GameObject.Instantiate(bindTemplate, modOptions.transform);
                 if (bindIndex % 2 == 0)
                     newKeyBind.transform.localPosition = new Vector3(0f, -80f * ((bindIndex / 2) + 1), 0f); // I love math
@@ -338,7 +339,7 @@ namespace UMM.HarmonyPatches
                 button.onClick.AddListener(delegate
                 {
                     OptionsManager.Instance.dontUnpause = true;
-                    __instance.StartCoroutine(UKAPI.KeyBindHandler.SetKeyBindRoutine(button.gameObject, keybindName));
+                    __instance.StartCoroutine(KeyBindHandler.SetKeyBindRoutine(button.gameObject, keybindName));
                     button.gameObject.GetComponent<Image>().color = new Color32(255, 103, 0, 255);
                 });
 
@@ -352,7 +353,7 @@ namespace UMM.HarmonyPatches
 
             RectTransform controlContentRect = controlContent.GetComponent<RectTransform>();
             controlContentRect.sizeDelta = new Vector2(620f, 1558.6f + (binds.Count * 20)); // setting the scrollbar to fit all of the binds
-            UKAPI.KeyBindHandler.OnKeyBindEnabled.AddListener(delegate (UKKeyBind keybind)
+            KeyBindHandler.OnKeyBindEnabled.AddListener(delegate (UKKeyBind keybind)
             {
                 if (bindTemplate == null)
                     return;
@@ -371,7 +372,7 @@ namespace UMM.HarmonyPatches
                 button.onClick.AddListener(delegate
                 {
                     OptionsManager.Instance.dontUnpause = true;
-                    __instance.StartCoroutine(UKAPI.KeyBindHandler.SetKeyBindRoutine(button.gameObject, keybind.bindName));
+                    __instance.StartCoroutine(KeyBindHandler.SetKeyBindRoutine(button.gameObject, keybind.bindName));
                     button.gameObject.GetComponent<Image>().color = new Color32(255, 103, 0, 255);
                 });
                 bindIndex++;

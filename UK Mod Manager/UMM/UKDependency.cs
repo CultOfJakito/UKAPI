@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UMM
+namespace UKAPI.UMM
 {
     public class UKDependency : Attribute
     {

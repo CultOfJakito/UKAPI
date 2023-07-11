@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using UKAPI.Internal;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UMM
+namespace UKAPI.UMM
 {
     public abstract class UKMod : MonoBehaviour
     {
@@ -41,7 +42,7 @@ namespace UMM
         /// <param name="value">Value to Set as a string</param>
         public void SetPersistentModData(string key, string value)
         {
-            UKAPI.SaveFileHandler.SetModData(metaData.name, key, value);
+            SaveFileHandler.SetModData(metaData.name, key, value);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace UMM
         /// <param name="modName">Name of mod to get the data from</param>
         public static void SetPersistentModData(string key, string value, string modName)
         {
-            UKAPI.SaveFileHandler.SetModData(modName, key, value);
+            SaveFileHandler.SetModData(modName, key, value);
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace UMM
         /// <param name="value">Value to Set as a string</param>
         public static void SetPersistentUniversalModData(string key, string value)
         {
-            UKAPI.SaveFileHandler.SetModData("allPersistentModData", key, value);
+            SaveFileHandler.SetModData("allPersistentModData", key, value);
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace UMM
         /// <param name="key">Name of value</param>
         public string RetrieveStringPersistentModData(string key)
         {
-            return UKAPI.SaveFileHandler.RetrieveModData(key, metaData.name);
+            return SaveFileHandler.RetrieveModData(key, metaData.name);
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace UMM
         /// <param name="modName">Name of mod to get the data from</param>
         public static string RetrieveStringPersistentModData(string key, string modName)
         {
-            return UKAPI.SaveFileHandler.RetrieveModData(key, modName);
+            return SaveFileHandler.RetrieveModData(key, modName);
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace UMM
         /// <param name="key">Name of value</param>
         public static string RetrieveStringPersistentUniversalModData(string key)
         {
-            return UKAPI.SaveFileHandler.RetrieveModData(key, "allPersistentModData");
+            return SaveFileHandler.RetrieveModData(key, "allPersistentModData");
         }
 
         /// <summary>
@@ -185,7 +186,7 @@ namespace UMM
         /// <param name="key">The name of the value you want to remove</param>
         public void RemovePersistentModData(string key)
         {
-            UKAPI.SaveFileHandler.RemoveModData(metaData.name, key);
+            SaveFileHandler.RemoveModData(metaData.name, key);
         }
 
         /// <summary>
@@ -195,7 +196,7 @@ namespace UMM
         /// <param name="modName">Name of mod to remove data from</param>
         public void RemovePersistentModData(string key, string modName)
         {
-            UKAPI.SaveFileHandler.RemoveModData(modName, key);
+            SaveFileHandler.RemoveModData(modName, key);
         }
 
         /// <summary>
@@ -204,7 +205,7 @@ namespace UMM
         /// <param name="key">The name of the value you want to remove</param>
         public static void RemovePersistentUniversalModData(string key)
         {
-            UKAPI.SaveFileHandler.RemoveModData("allPersistentModData", key);
+            SaveFileHandler.RemoveModData("allPersistentModData", key);
         }
 
         /// <summary>
@@ -212,7 +213,7 @@ namespace UMM
         /// <param name="key">The name of the value you want to ensure exists</param>
         public bool PersistentModDataExists(string key)
         {
-            return UKAPI.SaveFileHandler.EnsureModData(metaData.name, key);
+            return SaveFileHandler.EnsureModData(metaData.name, key);
         }
 
         /// <summary>
@@ -222,7 +223,7 @@ namespace UMM
         /// <param name="modName">Name of mod to get the data from</param>
         public static bool PersistentModDataExists(string key, string modName)
         {
-            return UKAPI.SaveFileHandler.EnsureModData(modName, key);
+            return SaveFileHandler.EnsureModData(modName, key);
         }
 
         /// <summary>
@@ -231,7 +232,7 @@ namespace UMM
         /// <param name="key">The name of the value you want to ensure exists</param>
         public static bool UniversalModDataExists(string key)
         {
-            return UKAPI.SaveFileHandler.EnsureModData("allPersistentModData", key);
+            return SaveFileHandler.EnsureModData("allPersistentModData", key);
         }
     }
 }

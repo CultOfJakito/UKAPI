@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using UMM;
+using UKAPI.Internal;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace UMM.Loader
+namespace UKAPI.UMM
 {
     public class ModProfile
     {

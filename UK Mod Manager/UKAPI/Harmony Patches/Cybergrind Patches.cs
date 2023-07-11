@@ -1,8 +1,7 @@
 ﻿using HarmonyLib;
-using UMM.Loader;
-using UnityEngine;
+using UKAPI.Internal;
 
-namespace UMM.HarmonyPatches
+namespace UKAPI.HarmonyPatches
 {
     [HarmonyPatch(typeof(FinalCyberRank), nameof(FinalCyberRank.GameOver))]
     internal static class Ensure_NoSubmitBadScore

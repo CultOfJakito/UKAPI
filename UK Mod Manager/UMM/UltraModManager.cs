@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using UMM.HarmonyPatches;
+using UKAPI.HarmonyPatches;
+using UKAPI.Internal;
 using UnityEngine;
 using UnityEngine.Networking;
-using static UMM.ModInformation;
+using static UKAPI.UMM.ModInformation;
 
-namespace UMM.Loader
+namespace UKAPI.UMM
 {
     public static class UltraModManager
     {
@@ -168,7 +169,7 @@ namespace UMM.Loader
                 if (iconInfo.Exists)
                     Plugin.instance.StartCoroutine(GetModImage(iconInfo, info));
                 foundMods.Add(info.GUID, info);
-                object retrievedData = UKAPI.SaveFileHandler.RetrieveModData("LoadOnStart", info.modName);
+                object retrievedData = SaveFileHandler.RetrieveModData("LoadOnStart", info.modName);
                 if (retrievedData != null && bool.Parse(retrievedData.ToString()))
                     info.loadOnStart = true;
             }
@@ -360,14 +361,14 @@ namespace UMM.Loader
 
         public static void LoadModProfiles()
         {
-            string modProfiles = UKAPI.SaveFileHandler.RetrieveModData("ModProfiles", "UMM");
+            string modProfiles = SaveFileHandler.RetrieveModData("ModProfiles", "UMM");
             while (modProfiles.IndexOf(";;") != -1)
             {
                 ModProfile newProfile = new ModProfile(modProfiles.Substring(0, modProfiles.IndexOf(";;")));
                 allProfiles.Add(newProfile.name, newProfile);
                 modProfiles = modProfiles.Substring(modProfiles.IndexOf(";;") + 2);
             }
-            string currentProfileRetrieved = UKAPI.SaveFileHandler.RetrieveModData("CurrentModProfile", "UMM");
+            string currentProfileRetrieved = SaveFileHandler.RetrieveModData("CurrentModProfile", "UMM");
             if (allProfiles.ContainsKey(currentProfileRetrieved))
                 currentProfile = allProfiles[currentProfileRetrieved];
         }
@@ -379,9 +380,9 @@ namespace UMM.Loader
             {
                 modProfiles += profile?.ToString();
             }
-            UKAPI.SaveFileHandler.SetModData("UMM", "ModProfiles", modProfiles);
+            SaveFileHandler.SetModData("UMM", "ModProfiles", modProfiles);
             if (currentProfile != null)
-                UKAPI.SaveFileHandler.SetModData("UMM", "CurrentModProfile", currentProfile.name);
+                SaveFileHandler.SetModData("UMM", "CurrentModProfile", currentProfile.name);
         }
     }
 }
