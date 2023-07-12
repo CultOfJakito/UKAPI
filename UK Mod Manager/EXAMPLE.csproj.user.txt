@@ -1,0 +1,10 @@
+To get this file to work:
+1. Rename it to "UKAPI.csproj.user"
+2. Change the path below to be your Ultrakill path
+3. Delete this text, so the first line is <Project ToolsVersion = "15.0"> and stuff
+
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ULTRAKILLPath>C:\YOURPATHHERE</ULTRAKILLPath>
+    </PropertyGroup>
+</Project>

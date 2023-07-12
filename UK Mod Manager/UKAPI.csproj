@@ -48,9 +48,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ManagedDir)\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Addressables, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDir)\Unity.Addressables.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InputSystem, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ManagedDir)\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDir)\Unity.ResourceManager.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(ManagedDir)\UnityEngine.dll</HintPath>
@@ -144,7 +152,7 @@
     <UMMPath>$(BepInExPluginsDir)/UMM/</UMMPath>
   </PropertyGroup>
   <Target Name="WarnBeforeBuild" BeforeTargets="BeforeBuild">
-    <Error Condition="!Exists($(ULTRAKILLPath))" Text="ULTRAKILLPath not set, create a .csproj.user file that sets this property to compile" />
+    <Error Condition="!Exists($(ULTRAKILLPath))" Text="ULTRAKILLPath not set, create a .csproj.user file that sets this property to compile. There's an example file in the same directory as the .csproj to get started." />
   </Target>
   <Target Name="CopyModDlls" AfterTargets="AfterBuild">
     <Copy SourceFiles="$(OutDir)/$(AssemblyName).dll" DestinationFolder="$(UMMPath)" />

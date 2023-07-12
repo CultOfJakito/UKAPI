@@ -268,21 +268,6 @@ namespace UKAPI
                 WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized
             };
             System.Diagnostics.Process.Start(psi);
-
-            //Plugin.logger.LogMessage("Path is \"" + Environment.CurrentDirectory + "\\BepInEx\\plugins\\UMM\\UltrakillRestarter.exe\"");
-            //string strCmdText;
-            //strCmdText = "/K \"" + Environment.CurrentDirectory + "\\BepInEx\\plugins\\UMM\\Ultrakill Restarter.exe\""/* + System.Diagnostics.Process.GetCurrentProcess().Id.ToString() + "\""*/;
-            ////strCmdText = "/K \"" + Environment.CurrentDirectory + "ULTRAKILL.exe\"";
-            //System.Diagnostics.Process.Start("CMD.exe", strCmdText);
-
-            //var psi = new System.Diagnostics.ProcessStartInfo
-            //{
-            //    FileName = Environment.CurrentDirectory + "\\BepInEx\\plugins\\UMM\\Ultrakill Restarter.exe",
-            //    UseShellExecute = true,
-            //    WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized,
-            //    Arguments = System.Diagnostics.Process.GetCurrentProcess().Id.ToString()
-            //};
-            //System.Diagnostics.Process.Start(psi);
         }
     }
 }
