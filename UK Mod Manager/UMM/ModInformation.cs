@@ -21,7 +21,7 @@ namespace UKAPI.UMM
         public Version modVersion { get; private set; }
         public bool supportsUnloading { get; }
         public bool loadOnStart { get; internal set; }
-        public bool loaded { get; private set; }
+        public bool loaded { get; internal set; }
         public List<Dependency> dependencies { get; private set; }
         internal MethodInfo unloadMethod { get; private set; } = null;
 
@@ -42,9 +42,12 @@ namespace UKAPI.UMM
                     modVersion = metaData.Version;
                     modDescription = "NO DESCRIPTION FOUND";
                 }
-                unloadMethod = (MethodInfo)(from x in mod.GetMethods() where x.Name == "OnUnload" && x.GetParameters().Count() == 0 select x);
+                unloadMethod = (from x in mod.GetMethods() where x.Name == "OnUnload" && x.GetParameters().Count() == 0 select x).FirstOrDefault();
                 if (unloadMethod != null)
+                {
                     supportsUnloading = true;
+                    Debug.Log("Found unload method.");
+                }
             }
             else if (modType == ModType.UKMod)
             {
@@ -103,7 +106,6 @@ namespace UKAPI.UMM
             if (!loaded)
             {
                 UltraModManager.LoadMod(this);
-                loaded = true;
             }
             return loaded;
         }
@@ -112,14 +114,8 @@ namespace UKAPI.UMM
         {
             if (loaded && supportsUnloading)
             {
-                loaded = false;
                 UltraModManager.UnloadMod(this);
             }
-        }
-
-        internal void ForceLoadState(bool state)
-        {
-            loaded = state;
         }
 
         public enum ModType

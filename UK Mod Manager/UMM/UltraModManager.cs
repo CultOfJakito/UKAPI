@@ -297,8 +297,10 @@ namespace UKAPI.UMM
                     modObject.SetActive(false);
                     modObject.AddComponent(info.mod);
                     allLoadedMods.Add(info.GUID, info);
+                    modObjects.Add(info, modObject);
                     modObject.SetActive(true);
                     Plugin.logger.LogMessage("Loaded BepInExPlugin " + info.modName);
+                    info.loaded = true;
                     return;
                 }
                 if (!info.mod.IsSubclassOf(typeof(UKMod)))
@@ -314,6 +316,7 @@ namespace UKAPI.UMM
                 modObject.SetActive(true);
                 newMod.OnModLoaded();
                 Plugin.logger.LogMessage("Loaded UKMod " + info.modName);
+                info.loaded = true;
             }
             catch (Exception e)
             {
@@ -321,7 +324,6 @@ namespace UKAPI.UMM
                 Plugin.logger.LogError(e);
                 if (allLoadedMods.ContainsKey(info.GUID))
                     allLoadedMods.Remove(info.GUID);
-                info.ForceLoadState(false);
                 Inject_ModsButton.ReportModStateChanged(info);
                 if (modObject != null)
                 {
@@ -343,6 +345,7 @@ namespace UKAPI.UMM
 
         public static void UnloadMod(ModInformation info)
         {
+            Plugin.logger.LogInfo("Request to unload mod " + info.modName + " contains: " + modObjects.ContainsKey(info) + " supportsUnloading: " + info.supportsUnloading);
             if (modObjects.ContainsKey(info) && info.supportsUnloading)
             {
                 Plugin.logger.LogInfo("Trying to unload mod " + info.modName);
@@ -352,6 +355,8 @@ namespace UKAPI.UMM
                     UKMod mod = modObject.GetComponent<UKMod>();
                     mod.OnModUnloaded.Invoke();
                     mod.OnModUnload();
+                    if (!UltraModManager.GetUKMetaData(info.mod).allowCyberGrindSubmission)
+                        UKAPI.RemoveDisableCyberGrindReason(info.modName);
                 }
                 else
                 {
@@ -361,8 +366,7 @@ namespace UKAPI.UMM
                 modObjects.Remove(info);
                 allLoadedMods.Remove(info.GUID);
                 GameObject.Destroy(modObject);
-                if (!UltraModManager.GetUKMetaData(info.mod).allowCyberGrindSubmission)
-                    UKAPI.RemoveDisableCyberGrindReason(info.modName);
+                info.loaded = false;
                 Plugin.logger.LogInfo("Successfully unloaded mod " + info.modName);
             }
         }
