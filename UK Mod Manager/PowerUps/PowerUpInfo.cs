@@ -7,13 +7,45 @@ using UnityEngine;
 
 namespace UKAPI.PowerUps {
 	public class PowerUpInfo {
+		
+		/// <summary>
+		/// ID for the PowerUpInfo
+		/// </summary>
 		public string ID { get; set; } = Guid.NewGuid().ToString();
+		
+		/// <summary>
+		/// Color of the PowerUpPickup and the light source in a PowerUpPickup
+		/// </summary>
 		public Color Color { get; set; } = Color.white;
+		
+		/// <summary>
+		/// Icon of the PowerUp, appears in the center of the PowerUp
+		/// </summary>
 		public Sprite Icon { get; set; } = null;
+		
+		/// <summary>
+		/// Brightness of the light source in a PowerUpPickUp
+		/// </summary>
 		public float LightIntensity { get; set; } = 10f;
+		
+		/// <summary>
+		/// PowerUpPickupBuilder, Only change for custom changes to a power up pickup.
+		/// </summary>
 		public PowerUpPickupBuilder PickupBuilder { get; set; }
+		
+		/// <summary>
+		/// Script which defines PowerUp Behaviour (Inherits from PowerUp or TimedPowerUp)
+		/// </summary>
 		public Type BehaviourType { get; set; }
+		
+		/// <summary>
+		/// Duration of the PowerUp in Seconds
+		/// </summary>
 		public float DurationSeconds { get; set; } = 30f;
+		
+		/// <summary>
+		/// Whether the PowerUp works in Clash Mode or not (Gives 3 Extra Hits if True)
+		/// </summary>
 		public bool FPSOnly { get; set; } = true;
 		
 		private static GameObject _holderObject;
