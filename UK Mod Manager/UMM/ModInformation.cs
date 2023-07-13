@@ -23,11 +23,12 @@ namespace UKAPI.UMM
         public bool loadOnStart { get; internal set; }
         public bool loaded { get; internal set; }
         public List<Dependency> dependencies { get; private set; }
+        public DirectoryInfo fileDirectory;
         internal MethodInfo unloadMethod { get; private set; } = null;
 
-        public ModInformation(Type mod, ModType modType, string fileDirectory)
+        public ModInformation(Type mod, ModType modType, DirectoryInfo fileDirectory)
         {
-            Plugin.logger.LogInfo("Creating mod info " + fileDirectory + " " + mod.Name);
+            Plugin.logger.LogInfo("Creating mod info " + fileDirectory.FullName + " " + mod.Name);
             this.modType = modType;
             this.mod = mod;
 
@@ -36,7 +37,7 @@ namespace UKAPI.UMM
                 BepInPlugin metaData = UltraModManager.GetBepinMetaData(mod);
                 GUID = metaData.GUID;
                 dependencies = UltraModManager.GetBepinDependencies(mod);
-                if (!GetMetadataFromFile(fileDirectory))
+                if (!GetMetadataFromFile(fileDirectory.FullName))
                 {
                     modName = metaData.Name;
                     modVersion = metaData.Version;
@@ -56,7 +57,7 @@ namespace UKAPI.UMM
                 dependencies = UltraModManager.GetUKModDependencies(mod);
                 foreach (Dependency dependency in UltraModManager.GetBepinDependencies(mod))
                     dependencies.Add(dependency);
-                if (!metaData.usingManifest || !GetMetadataFromFile(fileDirectory))
+                if (!metaData.usingManifest || !GetMetadataFromFile(fileDirectory.FullName))
                 {
                     modName = metaData.name;
                     modDescription = metaData.description;

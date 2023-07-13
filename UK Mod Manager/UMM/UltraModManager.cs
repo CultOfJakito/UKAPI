@@ -155,9 +155,9 @@ namespace UKAPI.UMM
                 try
                 {
                     if (type.IsSubclassOf(typeof(UKMod)))
-                        info = new ModInformation(type, ModInformation.ModType.UKMod, fInfo.DirectoryName);
+                        info = new ModInformation(type, ModInformation.ModType.UKMod, fInfo.Directory);
                     else if (type.IsSubclassOf(typeof(BaseUnityPlugin)))
-                        info = new ModInformation(type, ModInformation.ModType.BepInPlugin, fInfo.DirectoryName);
+                        info = new ModInformation(type, ModInformation.ModType.BepInPlugin, fInfo.Directory);
                     else
                         continue;
                 }
