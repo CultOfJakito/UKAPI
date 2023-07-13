@@ -324,6 +324,7 @@ namespace UKAPI.UMM
                 Plugin.logger.LogError(e);
                 if (allLoadedMods.ContainsKey(info.GUID))
                     allLoadedMods.Remove(info.GUID);
+                info.loaded = false;
                 Inject_ModsButton.ReportModStateChanged(info);
                 if (modObject != null)
                 {
@@ -345,7 +346,6 @@ namespace UKAPI.UMM
 
         public static void UnloadMod(ModInformation info)
         {
-            Plugin.logger.LogInfo("Request to unload mod " + info.modName + " contains: " + modObjects.ContainsKey(info) + " supportsUnloading: " + info.supportsUnloading);
             if (modObjects.ContainsKey(info) && info.supportsUnloading)
             {
                 Plugin.logger.LogInfo("Trying to unload mod " + info.modName);
