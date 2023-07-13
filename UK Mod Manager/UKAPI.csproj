@@ -159,7 +159,7 @@
     <BepInExRootDir>$(ULTRAKILLPath)/BepInEx/</BepInExRootDir>
     <BepInExCoreDir>$(BepInExRootDir)/core/</BepInExCoreDir>
     <BepInExPluginsDir>$(BepInExRootDir)/plugins/</BepInExPluginsDir>
-    <UMMPath>$(BepInExPluginsDir)/UMM/</UMMPath>
+    <UMMPath>$(BepInExPluginsDir)/UKAPI/</UMMPath>
   </PropertyGroup>
   <Target Name="WarnBeforeBuild" BeforeTargets="BeforeBuild">
     <Error Condition="!Exists($(ULTRAKILLPath))" Text="ULTRAKILLPath not set, create a .csproj.user file that sets this property to compile. There's an example file in the same directory as the .csproj to get started." />
