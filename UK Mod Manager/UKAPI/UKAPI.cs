@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UKAPI.Internal;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Diagnostics;
+using UKAPI.PowerUps;
 using UKAPI.UMM;
+using UnityEngine.AddressableAssets;
 
 namespace UKAPI
 {
@@ -43,6 +45,11 @@ namespace UKAPI
         {
             Stopwatch watch = new Stopwatch();
             Plugin.logger.LogMessage("Beginning UKAPI");
+
+            PowerUpPickupBuilder.DualWieldPrefab = Addressables
+                .LoadAssetAsync<GameObject>("Assets/Prefabs/Levels/DualWieldPowerup.prefab")
+                .WaitForCompletion();
+
             string[] launchArgs = Environment.GetCommandLineArgs();
             if (launchArgs != null)
             {
