@@ -67,7 +67,7 @@ namespace UKAPI.Internal
         /// <param name="modName">The name of the mod to retrieve data from</param>
         /// <param name="key">The value you want</param>
         /// <returns>The mod data if found, otherwise null</returns>
-        public static string RetrieveModData(string key, string modName)
+        internal static string RetrieveModData(string key, string modName)
         {
             if (savedData.ContainsKey(modName))
             {
@@ -83,7 +83,7 @@ namespace UKAPI.Internal
         /// <param name="modName">The name of the mod to add data to</param>
         /// <param name="key">The key for the data</param>
         /// <param name="value">The data you want as a string, note you can only add strings</param>
-        public static void SetModData(string modName, string key, string value)
+        internal static void SetModData(string modName, string key, string value)
         {
             if (!savedData.ContainsKey(modName))
             {
@@ -102,7 +102,7 @@ namespace UKAPI.Internal
         /// </summary>
         /// <param name="modName">The name of the mod to remove data from</param>
         /// <param name="key">The key for the data</param>
-        public static void RemoveModData(string modName, string key)
+        internal static void RemoveModData(string modName, string key)
         {
             if (savedData.ContainsKey(modName))
             {
@@ -116,7 +116,7 @@ namespace UKAPI.Internal
         /// </summary>
         /// <param name="modName">The name of the mod to remove data from</param>
         /// <param name="key">The key for the data</param>
-        public static bool EnsureModData(string modName, string key)
+        internal static bool EnsureModData(string modName, string key)
         {
             return savedData.ContainsKey(modName) && savedData[modName].ContainsKey(key);
         }

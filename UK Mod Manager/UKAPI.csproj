@@ -128,13 +128,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UKAPI\KeyBindHandler.cs" />
-    <Compile Include="UKAPI\PowerUps\ExamplePowerUp\ExamplePowerUp.cs" />
-    <Compile Include="UKAPI\PowerUps\PowerUp.cs" />
-    <Compile Include="UKAPI\PowerUps\PowerUpInfo.cs" />
-    <Compile Include="UKAPI\PowerUps\PowerUpManager.cs" />
-    <Compile Include="UKAPI\PowerUps\PowerUpPickup.cs" />
-    <Compile Include="UKAPI\PowerUps\PowerUpPickupBuilder.cs" />
-    <Compile Include="UKAPI\PowerUps\TimedPowerUp.cs" />
+    <Compile Include="PowerUps\ExamplePowerUp\ExamplePowerUp.cs" />
+    <Compile Include="PowerUps\PowerUp.cs" />
+    <Compile Include="PowerUps\PowerUpInfo.cs" />
+    <Compile Include="PowerUps\PowerUpManager.cs" />
+    <Compile Include="PowerUps\PowerUpPickup.cs" />
+    <Compile Include="PowerUps\PowerUpPickupBuilder.cs" />
+    <Compile Include="PowerUps\TimedPowerUp.cs" />
     <Compile Include="UKAPI\UKKeyBind.cs" />
     <Compile Include="UKAPI\VersionHandler.cs" />
     <Compile Include="UMM\UKDependency.cs" />
@@ -145,8 +145,8 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="UKAPI\UKAPI.cs" />
     <Compile Include="UKAPI\SaveFileHandler.cs" />
-    <Compile Include="UMM\UKMod.cs" />
-    <Compile Include="UMM\UKPlugin.cs" />
+    <Compile Include="UMM\Obselote\UKMod.cs" />
+    <Compile Include="UMM\Obselote\UKPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UMM\UltraModManager.cs" />
   </ItemGroup>

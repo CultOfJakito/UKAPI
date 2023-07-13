@@ -347,9 +347,17 @@ namespace UKAPI.UMM
             {
                 Plugin.logger.LogInfo("Trying to unload mod " + info.modName);
                 GameObject modObject = modObjects[info];
-                UKMod mod = modObject.GetComponent<UKMod>();
-                mod.OnModUnloaded.Invoke();
-                mod.OnModUnload();
+                if (info.modType == ModType.UKMod)
+                {
+                    UKMod mod = modObject.GetComponent<UKMod>();
+                    mod.OnModUnloaded.Invoke();
+                    mod.OnModUnload();
+                }
+                else
+                {
+                    BaseUnityPlugin plugin = modObject.GetComponent<BaseUnityPlugin>();
+                    info.unloadMethod.Invoke(plugin, null);
+                }
                 modObjects.Remove(info);
                 allLoadedMods.Remove(info.GUID);
                 GameObject.Destroy(modObject);

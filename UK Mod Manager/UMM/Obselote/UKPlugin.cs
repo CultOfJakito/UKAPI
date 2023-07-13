@@ -2,6 +2,7 @@
 
 namespace UKAPI.UMM
 {
+    [Obsolete("BaseUnityPlugins can have a method called \"void Unload()\" which will be called when a mod is unloaded, and can also make use of UKAPI")]
     public class UKPlugin : Attribute
     {
         public string GUID { get; }

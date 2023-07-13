@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
 using UKAPI.Internal;
+using System.Reflection;
+using System.Linq;
 
 namespace UKAPI.UMM
 {
@@ -21,6 +23,7 @@ namespace UKAPI.UMM
         public bool loadOnStart { get; internal set; }
         public bool loaded { get; private set; }
         public List<Dependency> dependencies { get; private set; }
+        internal MethodInfo unloadMethod { get; private set; } = null;
 
         public ModInformation(Type mod, ModType modType, string fileDirectory)
         {
@@ -39,6 +42,9 @@ namespace UKAPI.UMM
                     modVersion = metaData.Version;
                     modDescription = "NO DESCRIPTION FOUND";
                 }
+                unloadMethod = (MethodInfo)(from x in mod.GetMethods() where x.Name == "OnUnload" && x.GetParameters().Count() == 0 select x);
+                if (unloadMethod != null)
+                    supportsUnloading = true;
             }
             else if (modType == ModType.UKMod)
             {

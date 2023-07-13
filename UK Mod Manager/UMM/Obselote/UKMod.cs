@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 namespace UKAPI.UMM
 {
+    [Obsolete("BaseUnityPlugins can have a method called \"void Unload()\" which will be called when a mod is unloaded, and can also make use of UKAPI")]
     public abstract class UKMod : MonoBehaviour
     {
         public UnityEvent OnModUnloaded = new UnityEvent();
