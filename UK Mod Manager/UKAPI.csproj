@@ -127,6 +127,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\CommandRegistry.cs" />
+    <Compile Include="Commands\Example Command\TestCommand.cs" />
+    <Compile Include="Commands\Patches\AddCommandsPatch.cs" />
+    <Compile Include="Commands\Patches\ShowBepinConsoleInGameConsolePatch.cs" />
+    <Compile Include="Commands\RegisterCommandAttribute.cs" />
     <Compile Include="UKAPI\KeyBindHandler.cs" />
     <Compile Include="PowerUps\ExamplePowerUp\ExamplePowerUp.cs" />
     <Compile Include="PowerUps\PowerUp.cs" />

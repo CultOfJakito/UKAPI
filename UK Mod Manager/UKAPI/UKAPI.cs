@@ -79,6 +79,7 @@ namespace UKAPI
                     }
                 }
             }
+            
             EndInitialization:
             watch.Stop();
             Plugin.logger.LogMessage("UMM initialization completed in " + watch.ElapsedMilliseconds + "ms");
