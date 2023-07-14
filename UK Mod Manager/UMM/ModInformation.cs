@@ -21,13 +21,14 @@ namespace UKAPI.UMM
         public Version modVersion { get; private set; }
         public bool supportsUnloading { get; }
         public bool loadOnStart { get; internal set; }
-        public bool loaded { get; private set; }
+        public bool loaded { get; internal set; }
         public List<Dependency> dependencies { get; private set; }
+        public DirectoryInfo fileDirectory;
         internal MethodInfo unloadMethod { get; private set; } = null;
 
-        public ModInformation(Type mod, ModType modType, string fileDirectory)
+        public ModInformation(Type mod, ModType modType, DirectoryInfo fileDirectory)
         {
-            Plugin.logger.LogInfo("Creating mod info " + fileDirectory + " " + mod.Name);
+            Plugin.logger.LogInfo("Creating mod info " + fileDirectory.FullName + " " + mod.Name);
             this.modType = modType;
             this.mod = mod;
 
@@ -36,15 +37,18 @@ namespace UKAPI.UMM
                 BepInPlugin metaData = UltraModManager.GetBepinMetaData(mod);
                 GUID = metaData.GUID;
                 dependencies = UltraModManager.GetBepinDependencies(mod);
-                if (!GetMetadataFromFile(fileDirectory))
+                if (!GetMetadataFromFile(fileDirectory.FullName))
                 {
                     modName = metaData.Name;
                     modVersion = metaData.Version;
                     modDescription = "NO DESCRIPTION FOUND";
                 }
-                unloadMethod = (MethodInfo)(from x in mod.GetMethods() where x.Name == "OnUnload" && x.GetParameters().Count() == 0 select x);
+                unloadMethod = (from x in mod.GetMethods() where x.Name == "OnUnload" && x.GetParameters().Count() == 0 select x).FirstOrDefault();
                 if (unloadMethod != null)
+                {
                     supportsUnloading = true;
+                    Debug.Log("Found unload method.");
+                }
             }
             else if (modType == ModType.UKMod)
             {
@@ -53,7 +57,7 @@ namespace UKAPI.UMM
                 dependencies = UltraModManager.GetUKModDependencies(mod);
                 foreach (Dependency dependency in UltraModManager.GetBepinDependencies(mod))
                     dependencies.Add(dependency);
-                if (!metaData.usingManifest || !GetMetadataFromFile(fileDirectory))
+                if (!metaData.usingManifest || !GetMetadataFromFile(fileDirectory.FullName))
                 {
                     modName = metaData.name;
                     modDescription = metaData.description;
@@ -103,7 +107,6 @@ namespace UKAPI.UMM
             if (!loaded)
             {
                 UltraModManager.LoadMod(this);
-                loaded = true;
             }
             return loaded;
         }
@@ -112,14 +115,8 @@ namespace UKAPI.UMM
         {
             if (loaded && supportsUnloading)
             {
-                loaded = false;
                 UltraModManager.UnloadMod(this);
             }
-        }
-
-        internal void ForceLoadState(bool state)
-        {
-            loaded = state;
         }
 
         public enum ModType

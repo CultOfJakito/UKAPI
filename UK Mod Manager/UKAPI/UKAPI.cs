@@ -8,6 +8,8 @@ using System.Diagnostics;
 using UKAPI.PowerUps;
 using UKAPI.UMM;
 using UnityEngine.AddressableAssets;
+using System.IO;
+using BepInEx;
 
 namespace UKAPI
 {
@@ -253,6 +255,23 @@ namespace UKAPI
         public static bool IsModLoaded(string GUID)
         {
             return UltraModManager.allLoadedMods.ContainsKey(GUID);
+        }
+        
+        /// <summary>
+        /// Given a BaseUnityPlugin, return its ModFolder
+        /// </summary>
+        /// <param name="mod">Your mod</param>
+        /// <returns>The folder of the .dll</returns>
+        /// <exception cref="NullReferenceException">If your mod is null</exception>
+        /// <exception cref="ArgumentException">If your mods folder couldn't be found</exception>
+        public static DirectoryInfo GetModFolder(BaseUnityPlugin mod)
+        {
+            if (mod == null)
+                throw new NullReferenceException("Tried to get the mod folder of a null mod");
+            BepInPlugin plugin = UltraModManager.GetBepinMetaData(mod.GetType());
+            if (!UltraModManager.foundMods.Keys.Contains(plugin.GUID))
+                throw new ArgumentException("Couldn't find ModInformation for plugin of GUID " + plugin.GUID);
+            return UltraModManager.foundMods[plugin.GUID].fileDirectory;
         }
 
         [Obsolete("Use AllModInfoClone instead.")]
