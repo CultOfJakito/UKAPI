@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -127,6 +129,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cheats\CheatBase.cs" />
+    <Compile Include="Cheats\CheatRegistry.cs" />
+    <Compile Include="Cheats\Example Cheat\ExampleCheat.cs" />
+    <Compile Include="Cheats\Patches\AddCheatsPatch.cs" />
+    <Compile Include="Cheats\RegisterCheatAttribute.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandRegistry.cs" />
     <Compile Include="Commands\Example Command\TestCommand.cs" />
@@ -158,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Assembly-CSharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -9,7 +9,10 @@ using UKAPI.PowerUps;
 using UKAPI.UMM;
 using UnityEngine.AddressableAssets;
 using System.IO;
+using System.Reflection;
 using BepInEx;
+using UKAPI.Cheats;
+using UKAPI.Cheats.Example_Cheat;
 
 namespace UKAPI
 {
@@ -81,7 +84,7 @@ namespace UKAPI
                     }
                 }
             }
-            
+            CheatRegistry.RegisterAllCommands(Assembly.GetAssembly(typeof(ExampleCheat)));
             EndInitialization:
             watch.Stop();
             Plugin.logger.LogMessage("UMM initialization completed in " + watch.ElapsedMilliseconds + "ms");
